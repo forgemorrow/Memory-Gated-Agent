@@ -4,7 +4,7 @@ English | [简体中文](./README_zh.md)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB.svg)](https://www.python.org/)
-[![CI](https://github.com/shiguangzhe666/Memory-Gated-Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/shiguangzhe666/Memory-Gated-Agent/actions/workflows/ci.yml)
+[![CI](https://github.com/forgemorrow/Memory-Gated-Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/forgemorrow/Memory-Gated-Agent/actions/workflows/ci.yml)
 
 A long-term memory gating framework and evaluation harness for LLM agents that balances retrieval utility against sensitive-data leakage risk.
 
@@ -59,7 +59,7 @@ From the archived 12-query evaluation runs in `data/results/*_memory_results.jso
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/shiguangzhe666/Memory-Gated-Agent.git
+git clone https://github.com/forgemorrow/Memory-Gated-Agent.git
 cd Memory-Gated-Agent
 pip install -r requirements.txt
 ```

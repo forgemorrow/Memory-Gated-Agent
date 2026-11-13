@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB.svg)](https://www.python.org/)
-[![CI](https://github.com/shiguangzhe666/Memory-Gated-Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/shiguangzhe666/Memory-Gated-Agent/actions/workflows/ci.yml)
+[![CI](https://github.com/forgemorrow/Memory-Gated-Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/forgemorrow/Memory-Gated-Agent/actions/workflows/ci.yml)
 
 面向**安全与效用平衡**的 LLM Agent 长期记忆门控框架与评测套件，用于在记忆检索增益和隐私/敏感信息泄露风险之间进行自动化决策控制。
 
@@ -54,7 +54,7 @@ flowchart LR
 ## 快速开始
 
 ```bash
-git clone https://github.com/shiguangzhe666/Memory-Gated-Agent.git
+git clone https://github.com/forgemorrow/Memory-Gated-Agent.git
 cd Memory-Gated-Agent
 pip install -r requirements.txt
 
