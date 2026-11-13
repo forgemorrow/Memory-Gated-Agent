@@ -3,6 +3,8 @@
 自动判断查询是否应该使用记忆，在安全和效用之间找最优平衡
 """
 
+import json
+import re
 from typing import Optional, List, Dict, Any
 from pydantic import BaseModel, Field
 from enum import Enum
@@ -101,6 +103,19 @@ class MemoryGate:
 
         return decision
 
+    @staticmethod
+    def _parse_json_payload(raw: str) -> Optional[Dict[str, Any]]:
+        """Parse JSON from raw or markdown-fenced LLM output."""
+        text = raw.strip()
+        fence_match = re.search(r"```(?:json)?\s*([\s\S]*?)\s*```", text)
+        if fence_match:
+            text = fence_match.group(1).strip()
+        try:
+            data = json.loads(text)
+            return data if isinstance(data, dict) else None
+        except Exception:
+            return None
+
     def _check_safety(
         self,
         query: str,
@@ -152,16 +167,15 @@ class MemoryGate:
 
         response = llm.invoke(messages)
 
-        import json
-        try:
-            return json.loads(response.content)
-        except Exception:
-            return {
-                "safety_score": 0.5,
-                "sensitive_items": [],
-                "risks": ["解析失败"],
-                "recommendation": "deny",
-            }
+        parsed = self._parse_json_payload(response.content)
+        if parsed is not None:
+            return parsed
+        return {
+            "safety_score": 0.5,
+            "sensitive_items": [],
+            "risks": ["解析失败"],
+            "recommendation": "deny",
+        }
 
     def _check_utility(
         self,
@@ -214,16 +228,15 @@ class MemoryGate:
 
         response = llm.invoke(messages)
 
-        import json
-        try:
-            return json.loads(response.content)
-        except Exception:
-            return {
-                "utility_score": 0.5,
-                "relevant_items": [],
-                "benefits": ["解析失败"],
-                "recommendation": "skip",
-            }
+        parsed = self._parse_json_payload(response.content)
+        if parsed is not None:
+            return parsed
+        return {
+            "utility_score": 0.5,
+            "relevant_items": [],
+            "benefits": ["解析失败"],
+            "recommendation": "skip",
+        }
 
     def _make_decision(
         self,
