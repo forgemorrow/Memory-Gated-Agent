@@ -70,8 +70,15 @@ if "agents" not in st.session_state:
             api_base=config.mimo.api_base,
             api_key=config.mimo.api_key,
             temperature=temperature,
+            safety_threshold=safety_threshold,
+            utility_threshold=utility_threshold,
         ),
     }
+
+gated_agent = st.session_state.agents.get("门控记忆 (创新)")
+if isinstance(gated_agent, GatedMemoryAgent):
+    gated_agent.safety_threshold = safety_threshold
+    gated_agent.utility_threshold = utility_threshold
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
